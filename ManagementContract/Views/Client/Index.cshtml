@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ManagementContract.Models.Client>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Clients</h1>
+<div class="form-group">
+	<form asp-controller="Client" asp-action="Search">
+		<input name="searchphrase" class="form-control" placeholder="Search here for any client data..." /> <br>
+		<input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" />
+	</form>
+</div>
+
+<div class="text-center">
+	<form method="post" asp-controller="Client" asp-action="ExportToCVS">
+
+		<input   class="btn btn-primary" type="submit" value="Export To CSV" />
+
+
+	</form>
+</div>
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Surname)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Mail)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Surname)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Mail)
+				</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

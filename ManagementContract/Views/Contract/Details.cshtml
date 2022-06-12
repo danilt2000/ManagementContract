@@ -1,0 +1,66 @@
+﻿@model ManagementContract.Models.Contract
+
+@{
+    ViewData["Title"] = "Details";
+    var client = (Client)ViewData["Client"];
+    var consultants = (List<Consultant>)ViewData["AllConsultants"];
+}
+
+<h1>Contract details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Institution)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Institution)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClosingDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClosingDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExpiryDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ExpiryDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TerminationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TerminationDate)
+        </dd>
+    </dl>
+    <div>
+        <h3>Client:</h3>
+        <a type="button" class="btn btn-info btn-sm" asp-controller="Client" asp-action="Details" asp-route-id="@client.Id">@client.Name</a><br>
+    </div>
+    <div>
+        <br>
+        <h3>Consultants:</h3>
+        <div class="text-start" >
+        @foreach (Consultant consultant in consultants)
+        { 
+            <a type="button" class="btn btn-success btn-sm" asp-controller="Consultant" asp-action="Details" asp-route-id="@consultant.Id">@consultant.Name @consultant.Surname</a>
+
+        }
+        </div>
+    </div>
+</div>
+<div>
+    <br>
+    <a asp-action="Delete" asp-route-id="@Model.Id" type="button" class="btn btn-danger">Delete</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id" type="button" class="btn btn-secondary">Edit dates</a> |
+    <a asp-action="Index" type="button" class="btn btn-warning">Back to List</a>
+</div>

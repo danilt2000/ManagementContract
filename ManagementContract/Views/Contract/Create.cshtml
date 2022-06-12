@@ -1,0 +1,77 @@
+﻿@model ManagementContract.Models.Contract
+
+@{
+	ViewData["Title"] = "Create";
+	List<Client> clients = (List<Client>)ViewData["AllClients"];
+	List<Consultant> consultants = (List<Consultant>)ViewData["AllConsultants"];
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="RegistrationNumber" class="control-label">Registration number</label>
+				<input asp-for="RegistrationNumber" class="form-control" required />
+				<span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Institution" class="control-label"></label>
+				<input asp-for="Institution" class="form-control" required />
+				<span asp-validation-for="Institution" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ClosingDate" class="control-label">Date of contract closing</label>
+				<input asp-for="ClosingDate" class="form-control" required />
+				<span asp-validation-for="ClosingDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ExpiryDate" class="control-label">Date of contract expiration</label>
+				<input asp-for="ExpiryDate" class="form-control" required />
+				<span asp-validation-for="ExpiryDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="TerminationDate" class="control-label">Date of contract termination</label>
+				<input asp-for="TerminationDate" class="form-control" required />
+				<span asp-validation-for="TerminationDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ClientId" class="control-label">Client</label>
+				<select asp-for="ClientId" class="form-control" required>
+					@foreach (var client in clients)
+					{
+						<option value="@client.Id"> @client.Name</option>
+					}
+				</select>
+				<span asp-validation-for="ClientId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Consultants" class="control-label"></label>
+				<select asp-for="Consultants" class="form-control" multiple required>
+					@foreach (var consultant in consultants)
+					{
+						<option value="@consultant.Id"> @consultant.Name</option>
+					}
+				</select>
+				<span asp-validation-for="Consultants" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

@@ -1,0 +1,78 @@
+﻿@model ManagementContract.Models.Client
+
+@{
+    ViewData["Title"] = "Details";
+    var contracts = (List<Contract>)ViewData["AllContracts"];
+
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+          <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd> 
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RodneCislo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RodneCislo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+    </dl>
+    <div>
+        <br>
+        <h3>Contracts:</h3>
+        @foreach (Contract contract in contracts)
+        {
+            <br>
+            <dl class="row">
+                <dt class="col-sm-2">Institution:</dt>
+                <dd class="col-sm-10">@contract.Institution</dd>
+                <dt class="col-sm-2">Registration number:</dt>
+                <dd class="col-sm-10">@contract.RegistrationNumber</dd>
+            </dl>
+                <a asp-controller="Contract" asp-action="Details" asp-route-id="@contract.Id" type="button" class="btn btn-success btn-sm">Show</a> <br>
+        }
+    </div>
+
+
+
+
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
